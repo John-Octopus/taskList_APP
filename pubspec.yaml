@@ -1,0 +1,37 @@
+name: checklist_app
+description: "安卓 / Windows 双端待办清单：左滑完成，右滑删除。"
+publish_to: 'none'
+
+# 版本号会写进安卓 versionName/versionCode 和 Windows 文件版本。
+version: 1.0.2+3
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 日期/时间选择器的中文文案。
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_local_notifications: ^22.3.3
+  flutter_timezone: ^5.1.1
+  sensors_plus: ^7.1.1
+  shared_preferences: ^2.5.6
+  timezone: ^0.11.2
+
+# 本地修复版：上游 plugin.cpp 引入了 <atlbase.h>，而 VS Build Tools 默认不带 ATL，
+# 会导致 Windows 编译报 C1083。这份副本改成纯 Dart 空实现（去掉 ffiPlugin），不再编译 C++。
+dependency_overrides:
+  flutter_local_notifications_windows:
+    path: third_party/flutter_local_notifications_windows
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
