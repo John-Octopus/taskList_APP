@@ -58,4 +58,5 @@ app.*.map.json
 /_setup/
 /_ref/
 
-# 交付产物（APK / Windows 打包目录，用户要求一起入库，故不忽略）
+# 交付产物 dist/（APK + Windows 打包目录）按用户要求一并入库，故不忽略。
+# 注意：APK 52.93MB 已超过 GitHub 建议的 50MB 单文件上限；后续若频繁更新二进制，建议迁到 Release 附件或 Git LFS。
