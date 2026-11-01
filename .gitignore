@@ -58,5 +58,4 @@ app.*.map.json
 /_setup/
 /_ref/
 
-# 交付产物（APK / Windows 打包目录约 80MB，默认不入库，需要时再单独添加）
-/dist/
+# 交付产物（APK / Windows 打包目录，用户要求一起入库，故不忽略）
