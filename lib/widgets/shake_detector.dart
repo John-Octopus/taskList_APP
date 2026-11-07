@@ -11,6 +11,10 @@ import 'package:sensors_plus/sensors_plus.dart';
 /// 逻辑：连续两次「加速度明显超过阈值」且间隔 < 700ms 才算一次摇动，
 /// 之后冷却 1.2 秒，避免一次抖动触发多次。
 /// Windows / 桌面端没有加速度计，直接不订阅，界面自己提供按钮兜底。
+///
+/// 说明：[isSupported] 在类加载时求值一次。放在静态初始化里是为了让
+/// widget 测试环境（Platform 是宿主系统而不是安卓）也能安全判断，
+/// 避免误把测试机当成手机去订阅不存在的传感器。
 class ShakeDetector extends StatefulWidget {
   const ShakeDetector({
     super.key,
@@ -21,15 +25,16 @@ class ShakeDetector extends StatefulWidget {
   final Widget child;
   final VoidCallback onShake;
 
-  static bool get isSupported =>
+  static final bool _mobile =
       !kIsWeb && (Platform.isAndroid || Platform.isIOS);
+
+  static bool get isSupported => _mobile;
 
   @override
   State<ShakeDetector> createState() => _ShakeDetectorState();
 }
 
-class _ShakeDetectorState extends State<ShakeDetector> {
-  /// 2.2g 以上的瞬时冲击视为「一次摇动尖峰」。
+class _ShakeDetectorState extends State<ShakeDetector> {  /// 2.2g 以上的瞬时冲击视为「一次摇动尖峰」。
   static const double _thresholdG = 2.2;
 
   StreamSubscription<AccelerometerEvent>? _subscription;

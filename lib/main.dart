@@ -5,11 +5,11 @@ import 'pages/home_page.dart';
 import 'services/reminder_service.dart';
 import 'state/task_store.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final TaskStore store = TaskStore();
-  // 先完成读盘再渲染，避免首帧闪一下空列表。
-  store.load();
+  // 先完成读盘再渲染，避免首帧闪一下空列表，也能第一时间拿到夜色模式。
+  await store.load();
   // 通知插件初始化要读时区、注册通道，异步做即可；sync() 内部会等它完成。
   ReminderService.instance.init();
   runApp(ChecklistApp(store: store));
@@ -24,16 +24,19 @@ class ChecklistApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '清单',
-      debugShowCheckedModeBanner: false,
-      locale: const Locale('zh', 'CN'),
-      supportedLocales: const <Locale>[Locale('zh', 'CN'), Locale('en', 'US')],
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      themeMode: ThemeMode.system,
-      theme: _build(Brightness.light),
-      darkTheme: _build(Brightness.dark),
-      home: HomePage(store: store),
+    return AnimatedBuilder(
+      animation: store,
+      builder: (BuildContext context, _) => MaterialApp(
+        title: '清单',
+        debugShowCheckedModeBanner: false,
+        locale: const Locale('zh', 'CN'),
+        supportedLocales: const <Locale>[Locale('zh', 'CN'), Locale('en', 'US')],
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        themeMode: store.themeMode,
+        theme: _build(Brightness.light),
+        darkTheme: _build(Brightness.dark),
+        home: HomePage(store: store),
+      ),
     );
   }
 

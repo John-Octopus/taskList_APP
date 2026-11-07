@@ -226,6 +226,13 @@ class _HomePageState extends State<HomePage> {
     _focus.requestFocus();
   }
 
+  /// 夜色模式三态的图标与提示。
+  static (IconData, String) _themeIcon(ThemeMode mode) => switch (mode) {
+        ThemeMode.system => (Icons.brightness_auto_rounded, '跟随系统'),
+        ThemeMode.light => (Icons.light_mode_rounded, '亮色'),
+        ThemeMode.dark => (Icons.dark_mode_rounded, '深色'),
+      };
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -287,6 +294,10 @@ class _HomePageState extends State<HomePage> {
             ),
         ];
 
+        // 夜色模式按钮：跟随系统 -> 亮色 -> 深色 循环。
+        final (IconData themeIcon, String themeLabel) =
+            _themeIcon(store.themeMode);
+
         final Widget scaffold = Scaffold(
           appBar: AppBar(
             title: const Text('清单'),
@@ -305,14 +316,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              if (completed.isNotEmpty)
-                IconButton(
-                  tooltip: ShakeDetector.isSupported
-                      ? '清除已完成（也可以摇一摇）'
-                      : '清除已完成',
-                  icon: const Icon(Icons.cleaning_services_outlined),
-                  onPressed: () => _clearCompleted(),
-                ),
+              IconButton(
+                tooltip: '夜色模式：$themeLabel',
+                icon: Icon(themeIcon),
+                onPressed: () {
+                  store.cycleThemeMode();
+                  HapticFeedback.selectionClick();
+                },
+              ),
               const SizedBox(width: 4),
             ],
           ),
@@ -345,6 +356,17 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
+          // 清扫按钮从标题栏挪到右下角；没有已完成任务时隐藏。
+          floatingActionButton: completed.isEmpty
+              ? null
+              : FloatingActionButton.extended(
+                  onPressed: () => _clearCompleted(),
+                  tooltip: ShakeDetector.isSupported
+                      ? '清除已完成（也可以摇一摇）'
+                      : '清除已完成',
+                  icon: const Icon(Icons.cleaning_services_outlined),
+                  label: Text('清除 ${completed.length}'),
+                ),
         );
 
         // 摇一摇只在有传感器的移动端生效。

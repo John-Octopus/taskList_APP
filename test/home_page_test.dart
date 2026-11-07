@@ -1,4 +1,4 @@
-import 'package:checklist_app/models/task.dart';
+﻿import 'package:checklist_app/models/task.dart';
 import 'package:checklist_app/pages/home_page.dart';
 import 'package:checklist_app/state/task_store.dart';
 import 'package:checklist_app/widgets/task_tile.dart';
@@ -98,7 +98,10 @@ void main() {
     store.complete(store.pending.first.id);
     await tester.pump();
 
-    await tester.tap(find.byTooltip('清除已完成'));
+    // FAB 是刚出现的新元素，先让它走完入场动画再点。
+    await tester.pump(const Duration(milliseconds: 400));
+    await tester.tap(find.byIcon(Icons.cleaning_services_outlined));
+    await tester.pump();
     await tester.pumpAndSettle();
 
     expect(store.completedCount, 0);

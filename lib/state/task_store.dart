@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/task.dart';
@@ -9,13 +9,38 @@ import '../models/task.dart';
 /// 全部状态与持久化。界面只读 [pending] / [completed] 并调用这里的方法。
 class TaskStore extends ChangeNotifier {
   static const String _storageKey = 'checklist.tasks.v1';
+  static const String _themeKey = 'checklist.theme.v1';
 
   final List<Task> _tasks = <Task>[];
   final Random _random = Random();
   SharedPreferences? _prefs;
   bool _loaded = false;
 
+  /// 夜色模式：跟随系统 -> 亮色 -> 深色 -> 回到跟随系统。
+  ThemeMode _themeMode = ThemeMode.system;
+
   bool get isLoaded => _loaded;
+
+  ThemeMode get themeMode => _themeMode;
+
+  /// 三态循环切换，切换后立刻持久化。
+  void cycleThemeMode() {
+    _themeMode = switch (_themeMode) {
+      ThemeMode.system => ThemeMode.light,
+      ThemeMode.light => ThemeMode.dark,
+      ThemeMode.dark => ThemeMode.system,
+    };
+    notifyListeners();
+    _persistTheme();
+  }
+
+  Future<void> _persistTheme() async {
+    try {
+      await _prefs?.setString(_themeKey, _themeMode.name);
+    } catch (_) {
+      // 写盘失败不影响本次切换，下次启动读回旧值。
+    }
+  }
 
   List<Task> get pending =>
       _tasks.where((Task t) => !t.done).toList(growable: false);
@@ -37,6 +62,15 @@ class TaskStore extends ChangeNotifier {
   Future<void> load() async {
     try {
       _prefs = await SharedPreferences.getInstance();
+      final String? savedTheme = _prefs!.getString(_themeKey);
+      if (savedTheme != null) {
+        for (final ThemeMode mode in ThemeMode.values) {
+          if (mode.name == savedTheme) {
+            _themeMode = mode;
+            break;
+          }
+        }
+      }
       final String? raw = _prefs!.getString(_storageKey);
       _tasks.clear();
       if (raw != null && raw.isNotEmpty) {

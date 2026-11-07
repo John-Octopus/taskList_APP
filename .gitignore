@@ -1,4 +1,4 @@
-# Miscellaneous
+﻿# Miscellaneous
 *.class
 *.log
 *.pyc
@@ -60,3 +60,13 @@ app.*.map.json
 
 # 交付产物 dist/（APK + Windows 打包目录）按用户要求一并入库，故不忽略。
 # 注意：APK 52.93MB 已超过 GitHub 建议的 50MB 单文件上限；后续若频繁更新二进制，建议迁到 Release 附件或 Git LFS。
+
+# 安装包与导入的会话附件（不进版本库）
+/Typora-setup-x64.exe
+/.dsh-im/
+
+# 笔记栏调试日志
+/_plugins/dsh-notes-panel/notes-debug.log*
+
+# 本地开发的 DSH 插件源码（含调试日志），不随 App 入库
+/_plugins/
