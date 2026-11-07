@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "title": "对话 JSON 导出",
+    "description": "用 /save 或输入框旁的按钮把当前对话导出为 conversations.json。"
+  },
+  "dock": {
+    "label": "存为 JSON",
+    "hint": "把当前对话导出为 conversations.json",
+    "saved": "已开始下载",
+    "failed": "导出失败"
+  }
+}

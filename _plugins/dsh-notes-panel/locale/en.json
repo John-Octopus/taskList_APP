@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Notes",
+    "description": "Summarize what a conversation has left unresolved into a <window name>.md."
+  },
+  "panel": {
+    "title": "Notes",
+    "hint": "Pick a conversation to export what it has left unresolved.",
+    "loading": "Reading the conversation list…",
+    "empty": "This workspace has no conversations yet.",
+    "failed": "Could not read the list",
+    "refresh": "Refresh"
+  },
+  "row": {
+    "subagent": "sub",
+    "action": "Write note",
+    "working": "Summarizing…",
+    "done": "Exported",
+    "failed": "Failed, try again"
+  }
+}

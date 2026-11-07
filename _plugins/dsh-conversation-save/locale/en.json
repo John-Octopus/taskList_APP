@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "title": "Conversation JSON Export",
+    "description": "Exports the current conversation as conversations.json through /save or the composer dock button."
+  },
+  "dock": {
+    "label": "Save JSON",
+    "hint": "Export this conversation as conversations.json",
+    "saved": "Download started",
+    "failed": "Export failed"
+  }
+}

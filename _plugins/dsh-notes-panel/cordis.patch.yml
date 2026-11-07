@@ -1,0 +1,12 @@
+# Bundle patch for dsh-notes-panel: adds the notes row to the Host tree.
+#
+# `cwd` is the workspace whose conversations the panel lists. The Host's own
+# `process.cwd()` is not necessarily the Session workspace, so it is pinned
+# here; change it to move the panel to another workspace.
+- insert:
+    - id: notes-panel
+      name: 'dsh-notes-panel'
+      config:
+        sessionsPath: /api/notes-panel/sessions
+        notePath: /api/notes-panel/note
+        cwd: 'C:\Users\ZCC\Desktop\CheckListApp'

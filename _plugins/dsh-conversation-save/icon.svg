@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Conversation JSON export">
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#247bbf"/>
+  <path d="M20 17h24a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V21a4 4 0 0 1 4-4z" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M24 26h16M24 33h16M24 40h9" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="45" cy="44" r="8" fill="#247bbf" stroke="#ffffff" stroke-width="3.2"/>
+  <path d="M45 40v8M41.4 44h7.2" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Notes from a conversation">
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#2f8f6a"/>
+  <path d="M20 13h15.5L45 22.5V51H20z" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M35.5 13v9.5H45" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M26 30h13M26 37h9" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="45.5" cy="45.5" r="8" fill="#2f8f6a" stroke="#ffffff" stroke-width="3.2"/>
+  <path d="M42.4 45.6l2.2 2.2 4.1-4.4" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

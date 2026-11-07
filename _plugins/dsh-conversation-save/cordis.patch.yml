@@ -1,0 +1,8 @@
+- insert:
+    - id: conversation-save
+      name: 'dsh-conversation-save'
+      config:
+        routePath: /api/conversation-save
+        includeReasoning: false
+        includeTools: false
+        cwd: 'C:\Users\ZCC\Desktop\CheckListApp'
