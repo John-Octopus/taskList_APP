@@ -356,16 +356,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          // 清扫按钮从标题栏挪到右下角；没有已完成任务时隐藏。
+          // 清扫按钮从标题栏挪到右下角，再抬到输入栏上方，免得压住底部的输入框和「+」。
           floatingActionButton: completed.isEmpty
               ? null
-              : FloatingActionButton.extended(
-                  onPressed: () => _clearCompleted(),
-                  tooltip: ShakeDetector.isSupported
-                      ? '清除已完成（也可以摇一摇）'
-                      : '清除已完成',
-                  icon: const Icon(Icons.cleaning_services_outlined),
-                  label: Text('清除 ${completed.length}'),
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: 84),
+                  child: FloatingActionButton.extended(
+                    onPressed: () => _clearCompleted(),
+                    tooltip: ShakeDetector.isSupported
+                        ? '清除已完成（也可以摇一摇）'
+                        : '清除已完成',
+                    icon: const Icon(Icons.cleaning_services_outlined),
+                    label: Text('清除 ${completed.length}'),
+                  ),
                 ),
         );
 

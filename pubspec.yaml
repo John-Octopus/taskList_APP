@@ -3,7 +3,7 @@ description: "安卓 / Windows 双端待办清单：左滑完成，右滑删除�
 publish_to: 'none'
 
 # 版本号会写进安卓 versionName/versionCode 和 Windows 文件版本。
-version: 1.0.3+4
+version: 1.0.4+5
 
 environment:
   sdk: ^3.13.7
