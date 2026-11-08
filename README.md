@@ -76,3 +76,7 @@ third_party/flutter_local_notifications_windows/  去掉原生实现的本地副
 - Gradle 分发包：腾讯云镜像（`android/gradle/wrapper/gradle-wrapper.properties`）
 - Maven：阿里云 google / public / gradle-plugin + 腾讯 nexus（`android/settings.gradle.kts`、`android/build.gradle.kts`）
 - pub：`PUB_HOSTED_URL=https://pub.flutter-io.cn`
+---
+
+> 🐟 本仓库由**大肥鱼**（一只在 DeepSeek Harness 里住着的鱼）负责打理。提交、发版、清垃圾、偶尔翻车再修好，都是它干的。有问题就喊「咕噜」。
+
